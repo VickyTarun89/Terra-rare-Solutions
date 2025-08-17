@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 import { 
   Recycle, 
   Shield, 
@@ -25,6 +26,8 @@ function App() {
     message: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -32,12 +35,60 @@ function App() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    alert('Thank you for your inquiry! We will contact you soon.');
-    setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+    setIsSubmitting(true);
+
+    try {
+      // EmailJS configuration - you'll need to set up your EmailJS account
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        message: formData.message,
+        to_email: 'sivakumar@terrararesolutions.in'
+      };
+
+      // Replace these with your actual EmailJS credentials
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // You'll need to replace this
+        'YOUR_TEMPLATE_ID', // You'll need to replace this
+        templateParams,
+        'YOUR_PUBLIC_KEY' // You'll need to replace this
+      );
+
+      alert('Thank you for your inquiry! We will contact you soon.');
+      setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('There was an error sending your message. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleSchedulePickup = async () => {
+    try {
+      const templateParams = {
+        from_name: 'Website Visitor',
+        message: 'Someone clicked Schedule Pickup button on the website',
+        to_email: 'sivakumar@terrararesolutions.in',
+        subject: 'Schedule Pickup Request'
+      };
+
+      await emailjs.send(
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
+        templateParams,
+        'YOUR_PUBLIC_KEY'
+      );
+
+      alert('Pickup request sent! We will contact you soon to schedule.');
+    } catch (error) {
+      console.error('Error sending pickup request:', error);
+      alert('Please contact us directly at sivakumar@terrararesolutions.in to schedule pickup.');
+    }
   };
 
   return (
@@ -85,27 +136,16 @@ function App() {
                 environmental compliance.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <button className="bg-green-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 flex items-center justify-center">
+                <button 
+                  onClick={handleSchedulePickup}
+                  className="bg-green-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 flex items-center justify-center"
+                >
                   Schedule Pickup
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
                 <button className="border-2 border-green-600 text-green-600 px-8 py-4 rounded-lg font-semibold hover:bg-green-50 transition-colors">
                   Learn More
                 </button>
-              </div>
-              <div className="grid grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-600">50K+</div>
-                  <div className="text-sm text-gray-600">Tons Recycled</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600">500+</div>
-                  <div className="text-sm text-gray-600">Happy Clients</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-600">15+</div>
-                  <div className="text-sm text-gray-600">Cities Covered</div>
-                </div>
               </div>
             </div>
             <div className="relative">
@@ -397,7 +437,7 @@ function App() {
                   </div>
                   <div>
                     <div className="font-semibold">Call Us</div>
-                    <div className="text-green-100">+91 98765 43210</div>
+                    <div className="text-green-100">+91 8148234537</div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -406,20 +446,7 @@ function App() {
                   </div>
                   <div>
                     <div className="font-semibold">Email Us</div>
-                    <div className="text-green-100">info@terrararesolutions.com</div>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="bg-white/20 p-3 rounded-lg">
-                    <MapPin className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="font-semibold">Visit Our Office</div>
-                    <div className="text-green-100">
-                      123 Industrial Estate<br />
-                      Chennai, Tamil Nadu 600001<br />
-                      India
-                    </div>
+                    <div className="text-green-100">sivakumar@terrararesolutions.in</div>
                   </div>
                 </div>
               </div>
@@ -499,9 +526,10 @@ function App() {
                 ></textarea>
                 <button
                   type="submit"
-                  className="w-full bg-white text-green-600 px-8 py-4 rounded-lg font-semibold hover:bg-green-50 transition-colors flex items-center justify-center"
+                  disabled={isSubmitting}
+                  className="w-full bg-white text-green-600 px-8 py-4 rounded-lg font-semibold hover:bg-green-50 transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </button>
               </form>
