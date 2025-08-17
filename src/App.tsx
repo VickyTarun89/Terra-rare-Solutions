@@ -97,20 +97,48 @@ function App() {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-green-500 to-blue-500 p-2 rounded-lg">
-                <Recycle className="h-6 w-6 text-white" />
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <div className="bg-gradient-to-br from-green-500 via-emerald-500 to-blue-600 p-3 rounded-xl shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                  <Recycle className="h-8 w-8 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
               </div>
-              <span className="text-2xl font-bold text-gray-900">Terrarare Solutions</span>
+              <div className="flex flex-col">
+                <div className="flex items-center space-x-2">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-blue-600 bg-clip-text text-transparent">
+                    Terrarare
+                  </span>
+                  <span className="text-2xl font-bold text-gray-800">Solutions</span>
+                </div>
+                <div className="flex items-center space-x-2 -mt-1">
+                  <div className="h-0.5 w-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-full"></div>
+                  <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">E-Waste Recycling</span>
+                  <div className="h-0.5 w-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-full"></div>
+                </div>
+              </div>
             </div>
             <nav className="hidden md:flex space-x-8">
-              <a href="#about" className="text-gray-700 hover:text-green-600 font-medium transition-colors">About</a>
-              <a href="#services" className="text-gray-700 hover:text-green-600 font-medium transition-colors">Services</a>
-              <a href="#sustainability" className="text-gray-700 hover:text-green-600 font-medium transition-colors">Sustainability</a>
-              <a href="#contact" className="text-gray-700 hover:text-green-600 font-medium transition-colors">Contact</a>
+              <a href="#about" className="relative text-gray-700 hover:text-green-600 font-medium transition-all duration-300 group">
+                About
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-green-500 to-blue-500 group-hover:w-full transition-all duration-300"></span>
+              </a>
+              <a href="#services" className="relative text-gray-700 hover:text-green-600 font-medium transition-all duration-300 group">
+                Services
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-green-500 to-blue-500 group-hover:w-full transition-all duration-300"></span>
+              </a>
+              <a href="#sustainability" className="relative text-gray-700 hover:text-green-600 font-medium transition-all duration-300 group">
+                Sustainability
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-green-500 to-blue-500 group-hover:w-full transition-all duration-300"></span>
+              </a>
+              <a href="#contact" className="relative text-gray-700 hover:text-green-600 font-medium transition-all duration-300 group">
+                Contact
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-green-500 to-blue-500 group-hover:w-full transition-all duration-300"></span>
+              </a>
             </nav>
-            <button className="bg-green-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors">
-              Get Quote
+            <button className="relative bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+              <span className="relative z-10">Get Quote</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-400 rounded-lg opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
             </button>
           </div>
         </div>
@@ -544,10 +572,19 @@ function App() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <div className="bg-gradient-to-r from-green-500 to-blue-500 p-2 rounded-lg">
-                  <Recycle className="h-6 w-6 text-white" />
+                <div className="relative">
+                  <div className="bg-gradient-to-br from-green-500 via-emerald-500 to-blue-600 p-3 rounded-xl shadow-lg">
+                    <Recycle className="h-8 w-8 text-white" />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full"></div>
                 </div>
-                <span className="text-xl font-bold">Terrarare Solutions</span>
+                <div className="flex flex-col">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xl font-bold text-white">Terrarare</span>
+                    <span className="text-xl font-bold text-green-300">Solutions</span>
+                  </div>
+                  <span className="text-xs text-gray-300 uppercase tracking-wider">E-Waste Recycling</span>
+                </div>
               </div>
               <p className="text-gray-400 mb-4">
                 India's trusted partner in responsible electronic waste recycling 
